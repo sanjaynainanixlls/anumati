@@ -49,8 +49,7 @@ class Action {
             $result = $userDataHandlerObj->testing($this->postParams);
             if (!empty($result)) {
                 session_start();
-                $_SESSION['message'] = "Registration Done Successfully.";
-                header("location: ../testing.php");
+                include 'generatePDF.php';
             }
             else {
                 $_SESSION['message'] = "Registration Failed. Please try again.";
