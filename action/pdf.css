@@ -1,0 +1,21 @@
+table {
+  font-family: arial, sans-serif;
+  display:table;
+  margin:0 auto;
+  width:100%;
+}
+
+
+td, th {
+  border: none;
+  width: 25%;
+}
+.header{
+  text-align:center;
+}
+.subHeader
+{
+  text-align:left;
+  font-size: 12px;
+  width: 25%;
+}

@@ -73,6 +73,25 @@ class userDataHandler {
         $result = queryRunner::doSelect($query);
         return $result;
     }
+
+    public function sangatRegistration($data) {
+        $query = "INSERT into sangat(name,father_name,mobile_number,address,gender,city,state,country,occupation,email) VALUES ('".$data['personName']."','".$data['fatherName']."','".$data['mobileNumber']."','".$data['address']."','".$data['gender']."','".$data['city']."','".$data['state']."','".$data['country']."','".$data['occupation']."','".$data['email']."')";
+        $result = queryRunner::doInsert($query);
+        return $result;
+    }
+
+    public function getSangatByMobileNumber($data) {
+        $query = "SELECT * from sangat where mobile_number = '".$data['mobileNumber']."'";
+        $result = queryRunner::doSelect($query);
+        return $result;
+    }
+
+    public function generateAnumatiPass($data) {
+        $query = "INSERT into anumati(sangat_id,arrivalDate,departureDate,comingBy,comingFrom,printHtml) values ('".$data['sangat_id']."','".$data['arrivalDate']."','".$data['departureDate']."','".$data['comingBy']."','".$data['comingFrom']."','".$data['printHtml']."')";
+        $result = queryRunner::doInsert($query);
+        return $result;
+    }
+    
 }
 
 ?>

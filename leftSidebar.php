@@ -77,6 +77,15 @@ if (!isset($_SESSION)) {
                 <li>
                     <a href="testing.php"><i class="fa fa-fw fa-plus"></i> TESTING</a>
                 </li>
+                <li>
+                    <a href="sangatRegistration.php"><i class="fa fa-fw fa-plus"></i> SANGAT REGISTRATION</a>
+                </li>
+                <li>
+                    <a href="searchRegistration.php"><i class="fa fa-fw fa-plus"></i> SEARCH REGISTRATION</a>
+                </li>
+                <li>
+                    <a href="anumatiRegistration.php"><i class="fa fa-fw fa-plus"></i> ANUMATI PASS</a>
+                </li>
             <?php } ?>
         </ul>
     </div>

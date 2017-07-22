@@ -18,10 +18,10 @@ class connection{
 
 	public function __construct()
 	{
-                //$host = "HOST";
-                //$db = 'database';//"admito_test";
-                //$user = "database-user";
-                //$pass = "password";
+                $host = "182.50.133.90";
+                $db = 'anumati';
+                $user = "anumatiDatabase";
+                $pass = "6Ig^sj26";
 
 		$this->_connection = new mysqli($host,$user,$pass,$db);
                 mysqli_set_charset($this->_connection, 'utf8');
