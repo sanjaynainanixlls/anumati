@@ -80,18 +80,79 @@ class userDataHandler {
         return $result;
     }
 
-    public function getSangatByMobileNumber($data) {
-        $query = "SELECT * from sangat where mobile_number = '".$data['mobileNumber']."'";
+    public function getFamilyInchargeDetailsByMobileNumber($data) {
+        $query = "SELECT * from familyIncharge where mobileNumber = '".$data['mobileNumber']."'";
+        $result = queryRunner::doSelect($query);
+        return $result;
+    }
+
+    public function getFamilyMembersByFamilyInchargeId($data) {
+        $query = "SELECT * from familyMembers where inchargeId = '".$data['inchargeId']."'";
+        $result = queryRunner::doSelect($query);
+        return $result;
+    }
+
+    public function getDistinctInchargeIdByMemberMobileNumber($data) {
+        $query = "SELECT DISTINCT(inchargeId) from familyMembers where mobileNumber = '".$data['mobileNumber']."'";
+        $result = queryRunner::doSelect($query);
+        return $result;
+    }
+
+    public function getFamilyInchargeDetailsById($data) {
+        $query = "SELECT * from familyIncharge where inchargeId = '".$data['inchargeId']."'";
+        $result = queryRunner::doSelect($query);
+        return $result;
+    }
+
+    public function getInchargeDetailsById($data) {
+        $query = "SELECT * from familyIncharge where inchargeId = '".$data['sangatId']."'";
+        $result = queryRunner::doSelect($query);
+        return $result;
+    }
+    
+    public function getMemberDetailById($data) {
+        $query = "SELECT * from familyMembers where familyMemberId = '".$data['sangatId']."'";
         $result = queryRunner::doSelect($query);
         return $result;
     }
 
     public function generateAnumatiPass($data) {
-        $query = "INSERT into anumati(sangat_id,arrivalDate,departureDate,comingBy,comingFrom,printHtml) values ('".$data['sangat_id']."','".$data['arrivalDate']."','".$data['departureDate']."','".$data['comingBy']."','".$data['comingFrom']."','".$data['printHtml']."')";
+        $query = "INSERT into anumatiPass(anumatiPassNumber,sangatId,isIncharge,arrivalDate,departureDate,comingBy,comingFrom,createdBy,createdAt) values ('".$data['anumatiPassNumber']."','".$data['memberId']."','".$data['isIncharge']."','".$data['arrivalDate']."','".$data['departureDate']."','".$data['comingBy']."','".$data['comingFrom']."','".$data['createdBy']."',now())";
         $result = queryRunner::doInsert($query);
         return $result;
     }
     
+    public function getAnumatiPassDetailsByNumber($data) {
+        $query = "SELECT * from anumatiPass where anumatiPassNumber = '".$data['anumatiPassNumber']."'";
+        $result = queryRunner::doSelect($query);
+        return $result;
+    }
+
+    public function familyRegistration($data) {
+        $query = "INSERT into familyIncharge(inchargeName,mobileNumber,email,address,city,occupation,age,gender,createdBy,createdAt) values ('".$data['inchargeName']."','".$data['mobileNumber']."','".$data['email']."','".$data['address']."','".$data['city']."','".$data['occupation']."','".$data['age']."','".$data['gender']."','".$data['createdBy']."',now());";
+        $result = queryRunner::doInsert($query);
+        return $result;
+    }
+
+    
+    public function getNewlyCreatedFamilyInchargeId($data) {
+        $query = "SELECT * from familyIncharge where mobileNumber = '".$data['mobileNumber']."' AND createdBy = '".$data['createdBy']."'";
+        $result = queryRunner::doSelect($query);
+        return $result;
+    }
+
+    public function saveFamilyMembers($data) {
+        $result;
+        for ($i = 1; $i <= $data['count']; $i++){ 
+                $fullName = "fullName".$i;
+                $gender = "gender".$i;
+                $mobileNumber = "mobileNumber".$i;
+                $age = "age".$i;
+                $query = "INSERT into familyMembers(inchargeId,fullName,gender,mobileNumber,age,createdAt,createdBy) values ('".$data["inchargeId"]."','".$data[$fullName]."','".$data[$gender]."','".$data[$mobileNumber]."','".$data[$age]."','".$data['createdBy']."',now())";
+                $result = queryRunner::doInsert($query);
+            }
+        return $result;
+    }
 }
 
 ?>

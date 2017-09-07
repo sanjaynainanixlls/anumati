@@ -15,7 +15,7 @@ if (!isset($_SESSION)) {
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
         </button>
-        <a class="navbar-brand" href="">S.S.D.N.</a>
+        <a class="navbar-brand" href="home.php">S.S.D.N.</a>
     </div>
     <ul class="nav navbar-right top-nav">
         <li class="dropdown">
@@ -85,6 +85,9 @@ if (!isset($_SESSION)) {
                 </li>
                 <li>
                     <a href="anumatiRegistration.php"><i class="fa fa-fw fa-plus"></i> ANUMATI PASS</a>
+                </li>
+                <li>
+                    <a href="registerFamily.php"><i class="fa fa-fw fa-plus"></i> FAMILY REGISTRATION</a>
                 </li>
             <?php } ?>
         </ul>

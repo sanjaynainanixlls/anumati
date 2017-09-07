@@ -25,7 +25,7 @@ class Action {
                     header("location: ../globalRegistrations.php");
                 }
                 else if (isset($_SESSION['role']) && $_SESSION['role'] == 'TESTING') {
-                    header("location: ../testing.php");
+                    header("location: ../home.php");
                 } 
             } else {
                 $_SESSION['error'] = "Invalid Username or Password!";
@@ -76,16 +76,60 @@ class Action {
         }
         else if ($this->postParams['action'] == 'getSangatByMobileNumber') {
             $userDataHandlerObj = new userDataHandler();
-            $result = $userDataHandlerObj->getSangatByMobileNumber($this->postParams);
+            $result = $userDataHandlerObj->getFamilyInchargeDetailsByMobileNumber($this->postParams);
             if (!empty($result)) {
-                session_start();
-                $_SESSION['sangatDetails'] = $result;
+                $this->postParams['inchargeId'] = $result[0]['inchargeId'];
+                $result2 = $userDataHandlerObj->getFamilyMembersByFamilyInchargeId($this->postParams);
+                $_SESSION['familyInchargeDetails'] = $result[0];
+                $_SESSION['familyMemberDetails'] = $result2;
                 $_SESSION['message'] = "Details Found.";
                 header("location: ../sangatDetail.php");
             }
             else {
-                $_SESSION['message'] = "No Detail Found. Please enter correct mobile number.";
-                header("location: ../searchRegistration.php");
+                $distinctInchargeIdByMemberMobileNumber = $userDataHandlerObj->getDistinctInchargeIdByMemberMobileNumber($this->postParams);
+                if(sizeof($distinctInchargeIdByMemberMobileNumber) == 1){
+                    $this->postParams['inchargeId'] = $distinctInchargeIdByMemberMobileNumber[0]['inchargeId'];
+                    $familyInchargeDetails = $userDataHandlerObj->getFamilyInchargeDetailsById($this->postParams);
+                    $familyMemberDetails = $userDataHandlerObj->getFamilyMembersByFamilyInchargeId($this->postParams);
+                    $_SESSION['familyInchargeDetails'] = $familyInchargeDetails[0];
+                    $_SESSION['familyMemberDetails'] = $familyMemberDetails;
+                    $_SESSION['message'] = "Details Found.";
+                    header("location: ../sangatDetail.php");
+                }
+                else{
+                    $_SESSION['message'] = "Bad data. Please contact admin for this issue.";
+                    header("location: ../sangatDetail.php");
+                }
+            }
+        }
+        else if ($this->postParams['action'] == 'familyRegistration') {
+            $userDataHandlerObj = new userDataHandler();
+            $this->postParams['createdBy'] = $_SESSION['user'];
+            $result = $userDataHandlerObj->familyRegistration($this->postParams);
+            if (!empty($result)) {
+                session_start();
+                $result2 = $userDataHandlerObj->getNewlyCreatedFamilyInchargeId($this->postParams);
+                $this->postParams['inchargeId'] = $result2[0]['inchargeId'];
+                if($this->postParams['count'] > 0)
+                {
+                    $result3 = $userDataHandlerObj->saveFamilyMembers($this->postParams);
+                    if (!empty($result3)) {
+                        $_SESSION['message'] = "Family Members Saved.";
+                        header("location: ../home.php");
+                    }
+                    else{
+                        $_SESSION['message'] = "Family Members Save failed.";
+                        header("location: ../home.php");
+                    }
+                }
+                else{
+                    $_SESSION['message'] = "Family Incharge Details Saved.";
+                    header("location: ../home.php");
+                }
+            }
+            else {
+                $_SESSION['message'] = "Failed incharge registration.";
+                header("location: ../home.php");
             }
         }
         else if($this->postParams['action'] == 'generatePass'){
@@ -113,13 +157,13 @@ class Action {
                 $mail->IsHTML(true);
                 $mail->Username = "sanjaynainani@xcelerators.biz";
                 $mail->Password = "sanjay@2049";
-                $bodytext = "Check Email"; //
+                $bodytext = "Your Anumati Pass has been registered in Shri Anandpur. Please take the print of the attached anumati pass to avoid long queues at Shri Anandpur."; //
                 $mail->From      = 'sanjaynainani@xcelerators.biz';
-                $mail->FromName  = 'admin';
-                $mail->Subject   = 'Important from Shri Anandpur';
+                $mail->FromName  = 'Anumati Pass Sewa';
+                $mail->Subject   = 'Anumati Pass for '. $this->postParams['name'];
                 $mail->Body      = $bodytext;
                 $mail->AddAddress($this->postParams['email']);
-                $mail->AddStringAttachment($emailAttachment, 'file.pdf');
+                $mail->AddStringAttachment($emailAttachment, 'anumati-pass.pdf');
                 if($mail->Send()){
                     $_SESSION['content'] = $content;
                     $_SESSION['message'] = "Registration Successful. Anumati Pass Sent to registered email";
@@ -133,6 +177,44 @@ class Action {
             else {
                 $_SESSION['message'] = "Failure";
                 header("location: ../searchRegistration.php");
+            }
+        }
+        else if($this->postParams['action'] == 'generateAnumatiPass'){
+            $success = false;
+            $userDataHandlerObj = new userDataHandler();
+            $this->postParams['anumatiPassNumber'] = time();
+            $this->postParams['createdBy'] = $_SESSION['user'];
+            
+            if(isset($this->postParams['memberIdForAnumatiPass'])){
+                $familyMemberIds = $this->postParams['memberIdForAnumatiPass'];
+                foreach ($familyMemberIds as $familyMemberId){ 
+                    $this->postParams['isIncharge'] = 0;
+                    if($this->postParams['inchargeId'] == $familyMemberId){
+                        $this->postParams['isIncharge'] = 1;
+                    }
+                    $this->postParams['memberId'] = $familyMemberId;
+                    $result = $userDataHandlerObj->generateAnumatiPass($this->postParams);
+                    if(!empty($result)){
+                        $success = true;
+                    }
+                }
+            }
+            if($success){
+                $anumatiPassDetails = $userDataHandlerObj->getAnumatiPassDetailsByNumber($this->postParams);
+                $inchargeDetails = $userDataHandlerObj->getFamilyInchargeDetailsById($this->postParams);
+                foreach ($anumatiPassDetails as $anumatiPassDetail){ 
+                    $memberDetail = $userDataHandlerObj->getMemberDetailById($anumatiPassDetail);
+                    $memberDetails[] = $memberDetail[0];
+                }
+                $_SESSION['anumatiPassDetails'] = $anumatiPassDetails;
+                $_SESSION['inchargeDetails'] = $inchargeDetails[0];
+                $_SESSION['memberDetails'] = $memberDetails;
+                $_SESSION['message'] = "Anumati Pass Generated Successfully";
+                header("location: ../home.php");
+            }
+            else{
+                $_SESSION['message'] = "There was some error while generating anumati pass. Please try after some time.";
+                header("location: ../home.php");
             }
         }
     }

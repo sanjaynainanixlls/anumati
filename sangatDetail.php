@@ -53,56 +53,99 @@ include 'includeSession.php';
                     <div class="row">
                         <div class="col-lg-12">
                             <div class="table-responsive">
+                            <h2>Family Details</h2>
+                            <form action="action/action.php" METHOD="POST">
+                                <input type="hidden" name="action" value="generateAnumatiPass">
                                 <table class="table table-responsive table-bordered table-hover" id="completeStatusTable">
                                     <thead>
                                         <tr id="tableHeads">
+                                            <th>SELECT</th>
                                             <th>NAME</th>
-                                            <th>FATHER'S NAME</th>
                                             <th>GENDER</th>
                                             <th>MOBILE NUMBER</th>
-                                            <th>EMAIL</th>
-                                            <th>ADDRESS</th>
-                                            <th>CITY</th>
-                                            <th>STATE</th>
-                                            <th>COUNTRY</th>
-                                            <th>OCCUPATION</th>
-                                            <th>GENERATE PASS</th>
                                         </tr>
                                     </thead>
                                     <tbody>
+                                        
                                         <?php 
-                                        if(isset($_SESSION['sangatDetails']) && !empty($_SESSION['sangatDetails'])){
-                                        $data = $_SESSION['sangatDetails'];
-                                         foreach ($data as $key => $value) { ?>
+                                        if(isset($_SESSION['familyInchargeDetails']) && !empty($_SESSION['familyInchargeDetails'])){
+                                        $data = $_SESSION['familyInchargeDetails']; ?>
                                         <tr class="completeStatusTableRow">
-                                            <form role="form" action="generatePass.php" method="post">
-                                                <input type="hidden" value="<?php if(isset($value['sangat_id']))  echo $value['sangat_id'];?>" name="id">
-                                                <input type="hidden" value="<?php if(isset($value['name']))  echo $value['name'];?>" name="name">
-                                                <input type="hidden" value="<?php if(isset($value['gender']))  echo $value['gender'];?>" name="gender">
-                                                <input type="hidden" value="<?php if(isset($value['father_name']))  echo $value['father_name'];?>" name="fatherName">
-                                                <input type="hidden" value="<?php if(isset($value['mobile_number']))  echo $value['mobile_number'];?>" name="mobileNumber">
-                                                <input type="hidden" value="<?php if(isset($value['email']))  echo $value['email'];?>" name="email">
-                                                <input type="hidden" value="<?php if(isset($value['address']))  echo $value['address'];?>" name="address">
-                                                <input type="hidden" value="<?php if(isset($value['city']))  echo $value['city'];?>" name="city">
-                                                <input type="hidden" value="<?php if(isset($value['state']))  echo $value['state'];?>" name="state">
-                                                <input type="hidden" value="<?php if(isset($value['country']))  echo $value['country'];?>" name="country">
-                                                <input type="hidden" value="<?php if(isset($value['occupation']))  echo $value['occupation'];?>" name="occupation">
-                                                <td class="completeStatusTableRowName"><?php echo $value['name']; ?></td>
-                                                <td><?php echo $value['father_name']; ?></td>
-                                                <td class="completeStatusTableRowPhoneNumber"><?php echo $value['gender']; ?></td>
-                                                <td><?php echo $value['mobile_number']; ?></td>
-                                                <td class="completeStatusTableRowCity"><?php echo $value['email']; ?></td>
-                                                <td><?php echo $value['address']; ?></td>
-                                                <td><?php echo $value['city']; ?></td>
-                                                <td><?php echo $value['state']; ?></td>
-                                                <td><?php echo $value['country']; ?></td>
-                                                <td><?php echo $value['occupation']; ?></td>
-                                                <td><input class="btn btn-success" type="submit" value="Generate Pass"></td>
-                                            </form>
+                                            <td><input type="checkbox" name="memberIdForAnumatiPass[]" value="<?php echo $data['inchargeId'] ?>"></td>
+                                            <td><?php echo $data['inchargeName']; ?></td>
+                                            <td><?php echo $data['gender']; ?></td>
+                                            <td><?php echo $data['mobileNumber']; ?></td>
+                                            <input type="hidden" name="address" value="<?php echo $data['address'] ?>">
+                                            <input type="hidden" name="email" value="<?php echo $data['email'] ?>">
+                                            <input type="hidden" name="city" value="<?php echo $data['city'] ?>">
+                                            <input type="hidden" name="inchargeId" value="<?php echo $data['inchargeId'] ?>">
+                                            <input type="hidden" name="inchargeName" value="<?php echo $data['inchargeName']; ?>">
+                                            <input type="hidden" name="inchargeGender" value="<?php echo $data['gender']; ?>">
+                                            <input type="hidden" name="inchargeMobileNumber" value="<?php echo $data['mobileNumber']; ?>">
                                         </tr>
-                                        <?php } }?>
+                                        <?php }?>
+                                        <?php 
+                                        if(isset($_SESSION['familyMemberDetails']) && !empty($_SESSION['familyMemberDetails'])){
+                                        $data = $_SESSION['familyMemberDetails'];var $count = 1;
+                                         foreach ($data as $key => $value) {
+                                          ?>
+                                        <tr class="completeStatusTableRow">
+                                                <td><input type="checkbox" name="memberIdForAnumatiPass[]" value="<?php echo $value['familyMemberId'] ?>"></td>
+                                                <td class="completeStatusTableRowName"><?php echo $value['fullName']; ?></td>
+                                                <td class="completeStatusTableRowPhoneNumber"><?php echo $value['gender']; ?></td>
+                                                <td><?php echo $value['mobileNumber']; ?></td>
+                                        </tr>
+                                        <?php } } unset($_SESSION['familyInchargeDetails']); unset($_SESSION['familyMemberDetails']);?>
                                     </tbody>
                                 </table>
+                                <table class="table table-responsive table-bordered table-hover" id="completeStatusTable">
+                                    <thead>
+                                        <tr id="tableHeads">
+                                            <th>Arrival Date</th>
+                                            <th>Departure Date</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td><input type="date" name="arrivalDate" class="form-control input-md"></td>
+                                            <td><input type="date" name="departureDate" class="form-control input-md"></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                                <table class="table table-responsive table-bordered table-hover" id="completeStatusTable">
+                                    <thead>
+                                        <tr id="tableHeads">
+                                            <th>Coming From</th>
+                                            <th>Coming By</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>
+                                                <select id="selectbasic" name="comingBy" class="form-control">
+                                                    <option value="Private Car">Private Car</option>
+                                                    <option value="Train">Train</option>
+                                                </select>
+                                            </td>
+                                            <td>
+                                                <select id="selectbasic" name="comingFrom" class="form-control">
+                                                    <option value="Ashok Nagar">Ashok Nagar</option>
+                                                    <option value="Gwalior">Gwalior</option>
+                                                    <option value="Urli">Urli</option>
+                                                    <option value="Mumbai">Mumbai</option>
+                                                    <option value="Pune">Pune</option>
+                                                    <option value="Bina">Bina</option>
+                                                    <option value="Lalitpur">Lalitpur</option>
+                                                </select>
+                                            </td>
+                                            
+                                        </tr>
+                                        <tr>
+                                            <td colspan=2 class="text-center"><button id="generateAnumatiPass" type="submit" class="btn btn-success">Submit</button></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </form>
                             </div>
                         </div>
                     </div>
@@ -112,7 +155,7 @@ include 'includeSession.php';
 
             </div>
             <!-- /#page-wrapper -->
-
+            
         </div>
         <!-- /#wrapper -->
 
