@@ -217,6 +217,10 @@ class Action {
                 header("location: ../home.php");
             }
         }
+        else if($this->postParams['action'] == 'sendMail'){
+            echo json_encode(array("sendSuccess"=>'successfuly registered'));
+        }
+
     }
 
 }

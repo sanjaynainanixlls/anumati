@@ -35,7 +35,7 @@ include 'includeSession.php';
             <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
             <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
         <![endif]-->
-
+    
     </head>
 
     <body>
@@ -109,48 +109,48 @@ include 'includeSession.php';
                                         <div class="table-responsive" id='printContent'>
                                             <table class="table table-responsive table-bordered">
                                                 <tr>
-                                                    <th class='header text-center' colspan='4'>
+                                                    <th class='text-center' colspan='4' style="padding:4px;margin:0px">
                                                         Shri Satguru Devay Namah
                                                     </th>
                                                 </tr>
                                                 <tr>
-                                                    <th class='header text-center' colspan='4'>
+                                                    <th class='text-center' colspan='4' style="padding:4px;margin:0px">
                                                         Anumati Pass
                                                     </th>
                                                 </tr>
-                                                <tr>
-                                                    <td class='subHeader'>S.No:</td>
-                                                    <td class='subHeader'><?php if(isset($anumatiPassDetail)){
+                                                <tr style="padding:4px;margin:0px">
+                                                    <td style="padding:4px;margin:0px" class='subHeader'>S.No:</td>
+                                                    <td style="padding:4px;margin:0px" class='subHeader' id="anumatiPassNumber"><?php if(isset($anumatiPassDetail)){
                                                         echo $anumatiPassDetail['anumatiPassNumber'];
                                                     } 
                                                     ?></td>
-                                                    <td class='subHeader'>Date:</td>
-                                                    <td class='subHeader'><?php echo date('d-m-Y') ?></td>
+                                                    <td style="padding:4px;margin:0px" class='subHeader'>Date:</td>
+                                                    <td style="padding:4px;margin:0px" class='subHeader'><?php echo date('d-m-Y') ?></td>
                                                 </tr>
-                                                <tr>
-                                                    <td class='subHeader'>Sangat Incharge:</td>
-                                                    <td class='subHeader'><?php echo $inchargeDetails['inchargeName']; ?></td>
-                                                    <td class='subHeader'>Sangat Mobile:</td>
-                                                    <td class='subHeader'><?php echo $inchargeDetails['mobileNumber']; ?></td>
+                                                <tr style="padding:4px;margin:0px">
+                                                    <td style="padding:4px;margin:0px" class='subHeader'>Sangat Incharge:</td>
+                                                    <td style="padding:4px;margin:0px" class='subHeader'><?php echo $inchargeDetails['inchargeName']; ?></td>
+                                                    <td style="padding:4px;margin:0px" class='subHeader'>Sangat Mobile:</td>
+                                                    <td style="padding:4px;margin:0px" class='subHeader'><?php echo $inchargeDetails['mobileNumber']; ?></td>
                                                 </tr>
-                                                <tr>
-                                                    <td class='subHeader'>Rehbar Name:</td>
-                                                    <td class='subHeader'>Param Pujniye Ammaji</td>
-                                                    <td class='subHeader'>Rehbar Mobile:</td>
-                                                    <td class='subHeader'>9011870007</td>
+                                                <tr style="padding:4px;margin:0px">
+                                                    <td style="padding:4px;margin:0px" class='subHeader'>Rehbar Name:</td>
+                                                    <td style="padding:4px;margin:0px" class='subHeader'>Param Pujniye Ammaji</td>
+                                                    <td style="padding:4px;margin:0px" class='subHeader'>Rehbar Mobile:</td>
+                                                    <td style="padding:4px;margin:0px" class='subHeader'>9011870007</td>
                                                 </tr>
-                                                <tr>
-                                                    <td class='subHeader'>Address</td>
-                                                    <td class='subHeader'><?php echo $inchargeDetails['address']; ?></td>
-                                                    <td class='subHeader'>Gender</td>
-                                                    <td class='subHeader'><?php echo $inchargeDetails['gender']; ?></td> 
+                                                <tr style="padding:4px;margin:0px">
+                                                    <td style="padding:4px;margin:0px" class='subHeader'>Address</td>
+                                                    <td style="padding:4px;margin:0px" class='subHeader'><?php echo $inchargeDetails['address']; ?></td>
+                                                    <td style="padding:4px;margin:0px" class='subHeader'>Gender</td>
+                                                    <td style="padding:4px;margin:0px" class='subHeader'><?php echo $inchargeDetails['gender']; ?></td> 
                                                 </tr>
-                                                <tr class='stayDetails'>
-                                                    <td class='subHeader'>Stay Details</td>
-                                                    <td class='subHeader' id='stayDetails' data-arrivalDate=<?php echo $anumatiPassDetail['arrivalDate']; ?> data-departureDate=<?php echo $anumatiPassDetail['departureDate']; ?>><span class="stayDetailSpan"></span></td>
+                                                <tr class='stayDetails' style="padding:4px;margin:0px">
+                                                    <td style="padding:4px;margin:0px" class='subHeader'>Stay Details</td>
+                                                    <td style="padding:4px;margin:0px" class='subHeader' id='stayDetails' colspan='3' data-arrivalDate=<?php echo $anumatiPassDetail['arrivalDate']; ?> data-departureDate=<?php echo $anumatiPassDetail['departureDate']; ?>><span class="stayDetailSpan"></span></td>
                                                 </tr>
-                                                <tr>
-                                                    <td class='header text-center' colspan='4'><strong>Note: This pass is only for Param Pujniye Ammaji’s Sangat.</strong></td>
+                                                <tr style="padding:4px;margin:0px">
+                                                    <td style="padding:4px;margin:0px" class='header text-center' colspan='4'><strong>Note: This pass is only for Param Pujniye Ammaji’s Sangat.</strong></td>
                                                 </tr>
                                             </table>
                                         </div>
@@ -167,48 +167,48 @@ include 'includeSession.php';
                                         <div class="table-responsive" id='printContent'>
                                             <table class="table table-responsive table-bordered">
                                                 <tr>
-                                                    <th class='header text-center' colspan='4'>
+                                                    <th class=' text-center' colspan='4' style="padding:4px;margin:0px">
                                                         Shri Satguru Devay Namah
                                                     </th>
                                                 </tr>
                                                 <tr>
-                                                    <th class='header text-center' colspan='4'>
+                                                    <th class=' text-center' colspan='4' style="padding:4px;margin:0px">
                                                         Anumati Pass
                                                     </th>
                                                 </tr>
-                                                <tr>
-                                                    <td class='subHeader'>S.No:</td>
-                                                    <td class='subHeader'><?php if(isset($anumatiPassDetail)){
+                                                <tr style="padding:4px;margin:0px">
+                                                    <td style="padding:4px;margin:0px" class='subHeader'>S.No:</td>
+                                                    <td style="padding:4px;margin:0px" class='subHeader' id="anumatiPassNumber"><?php if(isset($anumatiPassDetail)){
                                                         echo $anumatiPassDetail['anumatiPassNumber'];
                                                     } 
                                                     ?></td>
-                                                    <td class='subHeader'>Date:</td>
-                                                    <td class='subHeader'><?php echo date('d-m-Y') ?></td>
+                                                    <td style="padding:4px;margin:0px" class='subHeader'>Date:</td>
+                                                    <td style="padding:4px;margin:0px" class='subHeader'><?php echo date('d-m-Y') ?></td>
                                                 </tr>
-                                                <tr>
-                                                    <td class='subHeader'>Sangat Incharge:</td>
-                                                    <td class='subHeader'><?php echo $singleMember['fullName']; ?></td>
-                                                    <td class='subHeader'>Sangat Mobile:</td>
-                                                    <td class='subHeader'><?php echo $singleMember['mobileNumber']; ?></td>
+                                                <tr style="padding:4px;margin:0px">
+                                                    <td style="padding:4px;margin:0px" class='subHeader'>Sangat Incharge:</td>
+                                                    <td style="padding:4px;margin:0px" class='subHeader'><?php echo $singleMember['fullName']; ?></td>
+                                                    <td style="padding:4px;margin:0px" class='subHeader'>Sangat Mobile:</td>
+                                                    <td style="padding:4px;margin:0px" class='subHeader'><?php echo $singleMember['mobileNumber']; ?></td>
                                                 </tr>
-                                                <tr>
-                                                    <td class='subHeader'>Rehbar Name:</td>
-                                                    <td class='subHeader'>Param Pujniye Ammaji</td>
-                                                    <td class='subHeader'>Rehbar Mobile:</td>
-                                                    <td class='subHeader'>9011870007</td>
+                                                <tr style="padding:4px;margin:0px">
+                                                    <td style="padding:4px;margin:0px" class='subHeader'>Rehbar Name:</td>
+                                                    <td style="padding:4px;margin:0px" class='subHeader'>Param Pujniye Ammaji</td>
+                                                    <td style="padding:4px;margin:0px" class='subHeader'>Rehbar Mobile:</td>
+                                                    <td style="padding:4px;margin:0px" class='subHeader'>9011870007</td>
                                                 </tr>
-                                                <tr>
-                                                    <td class='subHeader'>Address</td>
-                                                    <td class='subHeader'><?php echo $inchargeDetails['address']; ?></td>
-                                                    <td class='subHeader'>Gender</td>
-                                                    <td class='subHeader'><?php echo $inchargeDetails['gender']; ?></td> 
+                                                <tr style="padding:4px;margin:0px">
+                                                    <td style="padding:4px;margin:0px" class='subHeader'>Address</td>
+                                                    <td style="padding:4px;margin:0px" class='subHeader'><?php echo $inchargeDetails['address']; ?></td>
+                                                    <td style="padding:4px;margin:0px" class='subHeader'>Gender</td>
+                                                    <td style="padding:4px;margin:0px" class='subHeader'><?php echo $singleMember['gender']; ?></td> 
                                                 </tr>
-                                                <tr class='stayDetails'>
-                                                    <td class='subHeader'>Stay Details</td>
-                                                    <td class='subHeader' id='stayDetails' data-arrivalDate=<?php echo $anumatiPassDetail['arrivalDate']; ?> data-departureDate=<?php echo $anumatiPassDetail['departureDate']; ?>><span class="stayDetailSpan"></span></td>
+                                                <tr class='stayDetails' style="padding:4px;margin:0px">
+                                                    <td style="padding:4px;margin:0px" class='subHeader'>Stay Details</td>
+                                                    <td style="padding:4px;margin:0px" class='subHeader' id='stayDetails' colspan='3' data-arrivalDate=<?php echo $anumatiPassDetail['arrivalDate']; ?> data-departureDate=<?php echo $anumatiPassDetail['departureDate']; ?>><span class="stayDetailSpan"></span></td>
                                                 </tr>
-                                                <tr>
-                                                    <td class='header text-center' colspan='4'><strong>Note: This pass is only for Param Pujniye Ammaji’s Sangat.</strong></td>
+                                                <tr style="padding:4px;margin:0px">
+                                                    <td style="padding:4px;margin:0px" class='header text-center' colspan='4'><strong>Note: This pass is only for Param Pujniye Ammaji’s Sangat.</strong></td>
                                                 </tr>
                                             </table>
                                         </div>
@@ -220,7 +220,10 @@ include 'includeSession.php';
                                 }
                             }
                             
-                        }    
+                        }
+                        unset($_SESSION['anumatiPassDetails']);
+                        unset($_SESSION['inchargeDetails']);
+                        unset($_SESSION['memberDetails']);
                     ?>
                     </div>
                     <!-- /.row -->
