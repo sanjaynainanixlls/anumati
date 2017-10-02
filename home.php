@@ -99,124 +99,127 @@ include 'includeSession.php';
                             $memberDetails = $_SESSION['memberDetails'];
                         }
                         
-                        $count = 0;
-                        foreach ($anumatiPassDetails as $key => $anumatiPassDetail) {
-                            if(isset($anumatiPassDetail['isIncharge']) && $anumatiPassDetail['isIncharge'] == 1){
-                                ?>
-                                    <div class="row" id="detailsDiv">
-                                <div class="col-lg-12">
-                                    <div class="table-responsive" id='printContent'>
-                                        <table class="table table-responsive table-bordered">
-                                            <tr>
-                                                <th class='header text-center' colspan='4'>
-                                                    Shri Satguru Devay Namah
-                                                </th>
-                                            </tr>
-                                            <tr>
-                                                <th class='header text-center' colspan='4'>
-                                                    Anumati Pass
-                                                </th>
-                                            </tr>
-                                            <tr>
-                                                <td class='subHeader'>S.No:</td>
-                                                <td class='subHeader'><?php if(isset($anumatiPassDetail)){
-                                                    echo $anumatiPassDetail['anumatiPassNumber'];
-                                                } 
-                                                ?></td>
-                                                <td class='subHeader'>Date:</td>
-                                                <td class='subHeader'><?php echo date('d-m-Y') ?></td>
-                                            </tr>
-                                            <tr>
-                                                <td class='subHeader'>Sangat Incharge:</td>
-                                                <td class='subHeader'><?php echo $inchargeDetails['inchargeName']; ?></td>
-                                                <td class='subHeader'>Sangat Mobile:</td>
-                                                <td class='subHeader'><?php echo $inchargeDetails['mobileNumber']; ?></td>
-                                            </tr>
-                                            <tr>
-                                                <td class='subHeader'>Rehbar Name:</td>
-                                                <td class='subHeader'>Param Pujniye Ammaji</td>
-                                                <td class='subHeader'>Rehbar Mobile:</td>
-                                                <td class='subHeader'>9011870007</td>
-                                            </tr>
-                                            <tr>
-                                                <td class='subHeader'>Address</td>
-                                                <td class='subHeader'><?php echo $inchargeDetails['address']; ?></td>
-                                                <td class='subHeader'>Gender</td>
-                                                <td class='subHeader'><?php echo $inchargeDetails['gender']; ?></td> 
-                                            </tr>
-                                            <tr class='stayDetails'>
-                                                <td class='subHeader'>Stay Details</td>
-                                                <td class='subHeader' id='stayDetails' data-arrivalDate=<?php echo $anumatiPassDetail['arrivalDate']; ?> data-departureDate=<?php echo $anumatiPassDetail['departureDate']; ?>><span class="stayDetailSpan"></span></td>
-                                            </tr>
-                                            <tr>
-                                                <td class='header text-center' colspan='4'><strong>Note: This pass is only for Param Pujniye Ammaji’s Sangat.</strong></td>
-                                            </tr>
-                                        </table>
+                        if(isset($anumatiPassDetails)){
+                            $count = 0;
+                            foreach ($anumatiPassDetails as $key => $anumatiPassDetail) {
+                                if(isset($anumatiPassDetail['isIncharge']) && $anumatiPassDetail['isIncharge'] == 1){
+                                    ?>
+                                        <div class="row" id="detailsDiv">
+                                    <div class="col-lg-12">
+                                        <div class="table-responsive" id='printContent'>
+                                            <table class="table table-responsive table-bordered">
+                                                <tr>
+                                                    <th class='header text-center' colspan='4'>
+                                                        Shri Satguru Devay Namah
+                                                    </th>
+                                                </tr>
+                                                <tr>
+                                                    <th class='header text-center' colspan='4'>
+                                                        Anumati Pass
+                                                    </th>
+                                                </tr>
+                                                <tr>
+                                                    <td class='subHeader'>S.No:</td>
+                                                    <td class='subHeader'><?php if(isset($anumatiPassDetail)){
+                                                        echo $anumatiPassDetail['anumatiPassNumber'];
+                                                    } 
+                                                    ?></td>
+                                                    <td class='subHeader'>Date:</td>
+                                                    <td class='subHeader'><?php echo date('d-m-Y') ?></td>
+                                                </tr>
+                                                <tr>
+                                                    <td class='subHeader'>Sangat Incharge:</td>
+                                                    <td class='subHeader'><?php echo $inchargeDetails['inchargeName']; ?></td>
+                                                    <td class='subHeader'>Sangat Mobile:</td>
+                                                    <td class='subHeader'><?php echo $inchargeDetails['mobileNumber']; ?></td>
+                                                </tr>
+                                                <tr>
+                                                    <td class='subHeader'>Rehbar Name:</td>
+                                                    <td class='subHeader'>Param Pujniye Ammaji</td>
+                                                    <td class='subHeader'>Rehbar Mobile:</td>
+                                                    <td class='subHeader'>9011870007</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class='subHeader'>Address</td>
+                                                    <td class='subHeader'><?php echo $inchargeDetails['address']; ?></td>
+                                                    <td class='subHeader'>Gender</td>
+                                                    <td class='subHeader'><?php echo $inchargeDetails['gender']; ?></td> 
+                                                </tr>
+                                                <tr class='stayDetails'>
+                                                    <td class='subHeader'>Stay Details</td>
+                                                    <td class='subHeader' id='stayDetails' data-arrivalDate=<?php echo $anumatiPassDetail['arrivalDate']; ?> data-departureDate=<?php echo $anumatiPassDetail['departureDate']; ?>><span class="stayDetailSpan"></span></td>
+                                                </tr>
+                                                <tr>
+                                                    <td class='header text-center' colspan='4'><strong>Note: This pass is only for Param Pujniye Ammaji’s Sangat.</strong></td>
+                                                </tr>
+                                            </table>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                                <?php
-                            }
-                            else{
-                                foreach ($memberDetails as $key => $singleMember) {
-                                   if($singleMember['familyMemberId'] == $anumatiPassDetail['sangatId'] && $anumatiPassDetail['isIncharge'] == 0){
-                                        ?>
-                                                <div class="row" id="detailsDiv">
-                                <div class="col-lg-12">
-                                    <div class="table-responsive" id='printContent'>
-                                        <table class="table table-responsive table-bordered">
-                                            <tr>
-                                                <th class='header text-center' colspan='4'>
-                                                    Shri Satguru Devay Namah
-                                                </th>
-                                            </tr>
-                                            <tr>
-                                                <th class='header text-center' colspan='4'>
-                                                    Anumati Pass
-                                                </th>
-                                            </tr>
-                                            <tr>
-                                                <td class='subHeader'>S.No:</td>
-                                                <td class='subHeader'><?php if(isset($anumatiPassDetail)){
-                                                    echo $anumatiPassDetail['anumatiPassNumber'];
-                                                } 
-                                                ?></td>
-                                                <td class='subHeader'>Date:</td>
-                                                <td class='subHeader'><?php echo date('d-m-Y') ?></td>
-                                            </tr>
-                                            <tr>
-                                                <td class='subHeader'>Sangat Incharge:</td>
-                                                <td class='subHeader'><?php echo $singleMember['fullName']; ?></td>
-                                                <td class='subHeader'>Sangat Mobile:</td>
-                                                <td class='subHeader'><?php echo $singleMember['mobileNumber']; ?></td>
-                                            </tr>
-                                            <tr>
-                                                <td class='subHeader'>Rehbar Name:</td>
-                                                <td class='subHeader'>Param Pujniye Ammaji</td>
-                                                <td class='subHeader'>Rehbar Mobile:</td>
-                                                <td class='subHeader'>9011870007</td>
-                                            </tr>
-                                            <tr>
-                                                <td class='subHeader'>Address</td>
-                                                <td class='subHeader'><?php echo $inchargeDetails['address']; ?></td>
-                                                <td class='subHeader'>Gender</td>
-                                                <td class='subHeader'><?php echo $inchargeDetails['gender']; ?></td> 
-                                            </tr>
-                                            <tr class='stayDetails'>
-                                                <td class='subHeader'>Stay Details</td>
-                                                <td class='subHeader' id='stayDetails' data-arrivalDate=<?php echo $anumatiPassDetail['arrivalDate']; ?> data-departureDate=<?php echo $anumatiPassDetail['departureDate']; ?>><span class="stayDetailSpan"></span></td>
-                                            </tr>
-                                            <tr>
-                                                <td class='header text-center' colspan='4'><strong>Note: This pass is only for Param Pujniye Ammaji’s Sangat.</strong></td>
-                                            </tr>
-                                        </table>
+                                    <?php
+                                }
+                                else{
+                                    foreach ($memberDetails as $key => $singleMember) {
+                                    if($singleMember['familyMemberId'] == $anumatiPassDetail['sangatId'] && $anumatiPassDetail['isIncharge'] == 0){
+                                            ?>
+                                                    <div class="row" id="detailsDiv">
+                                    <div class="col-lg-12">
+                                        <div class="table-responsive" id='printContent'>
+                                            <table class="table table-responsive table-bordered">
+                                                <tr>
+                                                    <th class='header text-center' colspan='4'>
+                                                        Shri Satguru Devay Namah
+                                                    </th>
+                                                </tr>
+                                                <tr>
+                                                    <th class='header text-center' colspan='4'>
+                                                        Anumati Pass
+                                                    </th>
+                                                </tr>
+                                                <tr>
+                                                    <td class='subHeader'>S.No:</td>
+                                                    <td class='subHeader'><?php if(isset($anumatiPassDetail)){
+                                                        echo $anumatiPassDetail['anumatiPassNumber'];
+                                                    } 
+                                                    ?></td>
+                                                    <td class='subHeader'>Date:</td>
+                                                    <td class='subHeader'><?php echo date('d-m-Y') ?></td>
+                                                </tr>
+                                                <tr>
+                                                    <td class='subHeader'>Sangat Incharge:</td>
+                                                    <td class='subHeader'><?php echo $singleMember['fullName']; ?></td>
+                                                    <td class='subHeader'>Sangat Mobile:</td>
+                                                    <td class='subHeader'><?php echo $singleMember['mobileNumber']; ?></td>
+                                                </tr>
+                                                <tr>
+                                                    <td class='subHeader'>Rehbar Name:</td>
+                                                    <td class='subHeader'>Param Pujniye Ammaji</td>
+                                                    <td class='subHeader'>Rehbar Mobile:</td>
+                                                    <td class='subHeader'>9011870007</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class='subHeader'>Address</td>
+                                                    <td class='subHeader'><?php echo $inchargeDetails['address']; ?></td>
+                                                    <td class='subHeader'>Gender</td>
+                                                    <td class='subHeader'><?php echo $inchargeDetails['gender']; ?></td> 
+                                                </tr>
+                                                <tr class='stayDetails'>
+                                                    <td class='subHeader'>Stay Details</td>
+                                                    <td class='subHeader' id='stayDetails' data-arrivalDate=<?php echo $anumatiPassDetail['arrivalDate']; ?> data-departureDate=<?php echo $anumatiPassDetail['departureDate']; ?>><span class="stayDetailSpan"></span></td>
+                                                </tr>
+                                                <tr>
+                                                    <td class='header text-center' colspan='4'><strong>Note: This pass is only for Param Pujniye Ammaji’s Sangat.</strong></td>
+                                                </tr>
+                                            </table>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                                        <?php
-                                   }
+                                            <?php
+                                    }
+                                    }
                                 }
                             }
+                            
                         }    
                     ?>
                     </div>

@@ -86,7 +86,7 @@ include 'includeSession.php';
                                         <?php }?>
                                         <?php 
                                         if(isset($_SESSION['familyMemberDetails']) && !empty($_SESSION['familyMemberDetails'])){
-                                        $data = $_SESSION['familyMemberDetails'];var $count = 1;
+                                        $data = $_SESSION['familyMemberDetails']; 
                                          foreach ($data as $key => $value) {
                                           ?>
                                         <tr class="completeStatusTableRow">
@@ -95,7 +95,8 @@ include 'includeSession.php';
                                                 <td class="completeStatusTableRowPhoneNumber"><?php echo $value['gender']; ?></td>
                                                 <td><?php echo $value['mobileNumber']; ?></td>
                                         </tr>
-                                        <?php } } unset($_SESSION['familyInchargeDetails']); unset($_SESSION['familyMemberDetails']);?>
+                                        <?php } } unset($_SESSION['familyInchargeDetails']);
+                                        unset($_SESSION['familyMemberDetails']);?>
                                     </tbody>
                                 </table>
                                 <table class="table table-responsive table-bordered table-hover" id="completeStatusTable">
